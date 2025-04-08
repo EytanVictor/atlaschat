@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATLASCHAT.IO - The Future of Open-Source AI Services">
+    <meta name="theme-color" content="#D4AF37">
+    <title>ATLASCHAT.IO</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Orbitron:wght@400;700&display=swap" as="style" onload="this.rel='stylesheet'">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --metallic-blue: #1E2A44;
+            --red-accent: #C8102E;
+            --white: #E6E6FA;
+            --shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 20px rgba(212, 175, 55, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E2A44 50%, #2A3F5F 100%);
+            color: var(--white);
+            min-height: 100vh; /* Keeps full height but allows growth */
+            overflow-y: auto; /* Enables vertical scrolling */
+            position: relative;
+        }
+
+        /* Holographic Background */
+        body::before {
+            content: '';
+            position: fixed; /* Fixed to stay in background */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+            animation: pulse 10s infinite ease-in-out;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .container {
+            background: linear-gradient(145deg, rgba(30, 42, 68, 0.95), rgba(42, 63, 95, 0.85));
+            padding: 4rem;
+            border-radius: 40px;
+            box-shadow: var(--shadow), inset 0 0 15px rgba(212, 175, 55, 0.3);
+            max-width: 1400px;
+            width: 95%;
+            border: 3px solid var(--gold);
+            margin: 2rem auto; /* Adds spacing and centers it */
+            position: relative;
+            overflow: hidden;
+            animation: neonEntry 1.5s ease-out;
+        }
+
+        @keyframes neonEntry {
+            from { opacity: 0; transform: translateY(50px); box-shadow: none; }
+            to { opacity: 1; transform: translateY(0); box-shadow: var(--shadow); }
+        }
+
+        header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(4rem, 10vw, 6rem);
+            color: var(--gold);
+            text-shadow: var(--glow), 0 0 40px rgba(212, 175, 55, 0.5);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            animation: flicker 3s infinite ease;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; text-shadow: var(--glow); }
+            50% { opacity: 0.95; text-shadow: 0 0 30px rgba(212, 175, 55, 0.7); }
+        }
+
+        header p {
+            font-size: 1.5rem;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 2s ease;
+            letter-spacing: 1px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 25px;
+            border: 2px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            opacity: 0;
+            animation: holoRise 0.8s ease forwards;
+            animation-delay: calc(0.15s * var(--i));
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2), transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--glow), 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .service-card h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        .service-card p {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .service-card a {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--metallic-blue);
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            border-radius: 30px;
+            border: 2px solid var(--gold);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .service-card a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(200, 16, 46, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .service-card a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .service-card a:hover {
+            background: var(--red-accent);
+            color: var(--white);
+            box-shadow: 0 0 20px rgba(200, 16, 46, 0.9);
+            transform: scale(1.05);
+        }
+
+        .open-source {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            border: 2px solid var(--gold);
+            animation: fadeIn 2.5s ease;
+        }
+
+        .open-source h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-shadow: var(--glow);
+        }
+
+        .open-source p {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+        }
+
+        .open-source a {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            padding: 14px 30px;
+            background: var(--metallic-blue);
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 35px;
+            border: 2px solid var(--gold);
+            transition: all 0.5s ease;
+            box-shadow: var(--glow);
+        }
+
+        .open-source a:hover {
+            background: var(--red-accent);
+            color: var(--white);
+            box-shadow: 0 0 25px rgba(200, 16, 46, 1);
+            transform: scale(1.1);
+        }
+
+        footer {
+            font-size: 1.4rem;
+            color: var(--white);
+            text-align: center;
+            text-shadow: 0 2px 6px rgba(212, 175, 55, 0.6);
+            animation: fadeIn 3s ease;
+            letter-spacing: 1px;
+            padding-bottom: 2rem; /* Extra space at bottom */
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes holoRise {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 2.5rem; }
+            header h1 { font-size: clamp(3rem, 8vw, 4rem); }
+            header p { font-size: 1.3rem; }
+            .services { grid-template-columns: 1fr; }
+            .service-card h2 { font-size: 2rem; }
+            .service-card p { font-size: 1.1rem; }
+            .service-card a { font-size: 1.4rem; padding: 10px 20px; }
+            .open-source h2 { font-size: 2.2rem; }
+            .open-source p { font-size: 1.2rem; }
+            .open-source a { font-size: 1.6rem; padding: 12px 25px; }
+            footer { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <main class="container" role="main">
+        <div class="particles" id="particles"></div>
+        <header>
+            <h1>ATLASCHAT.IO</h1>
+            <p>Free AI Innovation — Delivering Cutting-Edge Services Worldwide</p>
+        </header>
+        <section class="services" aria-label="Our AI Services">
+            <div class="service-card" style="--i: 1">
+                <h2>Email Generator</h2>
+                <p>AI-enhanced email management for seamless productivity and organization.</p>
+                <a href="https://email.atlaschat.io" target="_blank" draggable="false">Explore</a>
+            </div>
+            <div class="service-card" style="--i: 2">
+                <h2>Colour Barcode Generator</h2>
+                <p>Fast, accurate barcode scanning powered by advanced AI technology.</p>
+                <a href="https://barcode.atlaschat.io" target="_blank" draggable="false">Explore</a>
+            </div>
+            <div class="service-card" style="--i: 3">
+                <h2>AI Logo Design</h2>
+                <p>Create stunning designs effortlessly with our AI-driven design tools.</p>
+                <a href="https://aidesign.atlaschat.io" target="_blank" draggable="false">Explore</a>
+            </div>
+            <div class="service-card" style="--i: 4">
+                <h2>AI World News Feed</h2>
+                <p>Stay updated with curated AI news tailored to your interests.</p>
+                <a href="https://ainews.atlaschat.io" target="_blank" draggable="false">Explore</a>
+            </div>
+            <div class="service-card" style="--i: 5">
+                <h2>AI Search Grid</h2>
+                <p>Powerful AI search capabilities for instant, precise results.</p>
+                <a href="https://aisearch.atlaschat.io" target="_blank" draggable="false">Explore</a>
+            </div>
+            <div class="service-card" style="--i: 6">
+                <h2>Atlas On-Line Domain Registration</h2>
+                <p>Connect with our global network of AI solutions and services.</p>
+                <a href="https://www.atlas.net.tr" target="_blank" draggable="false">Explore</a>
+            </div>
+            <div class="service-card" style="--i: 7">
+                <h2>iPhone App Store</h2>
+                <p>Download our AI-powered apps for on-the-go innovation.</p>
+                <a href="https://apps.apple.com/app/id6447676653" target="_blank" draggable="false">Explore</a>
+            </div>
+        </section>
+        <section class="open-source" aria-label="Open Source Community">
+            <h2>Open Source Projects</h2>
+            <p>Contribute to our open-source AI initiatives. Visit our GitHub to get started!</p>
+            <a href="https://github.com/atlaschatioatlasnettr" target="_blank" draggable="false">Join the Community</a>
+        </section>
+        <footer role="contentinfo">
+            Worldwide Free AI Services by ATLAS ON-LINE — Innovating Openly for 30 Years
+        </footer>
+    </main>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registered:', reg))
+                    .catch(errರೀಕರಣ: err => console.log('Service Worker registration failed:', err));
+            });
+        }
+
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 60; i++) {
+            const particle = document.createElement('div');
+            const size = Math.random() * 5 + 2;
+            particle.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                background: rgba(212, 175, 55, ${Math.random() * 0.6 + 0.4});
+                border-radius: 50%;
+                animation: orbit ${Math.random() * 8 + 4}s infinite linear;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+            `;
+            particlesContainer.appendChild(particle);
+        }
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            @keyframes orbit {
+                0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+                50% { transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px) scale(1.2); opacity: 0.8; }
+                100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
